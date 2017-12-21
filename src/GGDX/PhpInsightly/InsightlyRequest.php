@@ -136,29 +136,29 @@ class InsightlyRequest{
         ]);
         try {
             switch ($method) {
-                case in_array($method, ['GET','POST']):
-                    if(count($data)){
-                        $response = $client->request($method,$url.'?'.http_build_query($data));
-                    } else {
-                        $response = $client->request($method,$url);
-                    }
-                    break;
-                // case 'GET':
+                // case in_array($method, ['GET','POST']):
                 //     if(count($data)){
                 //         $response = $client->request($method,$url.'?'.http_build_query($data));
                 //     } else {
                 //         $response = $client->request($method,$url);
                 //     }
                 //     break;
-                // case 'POST':
-                //     if(count($data)){
-                //         $response = $client->request($method,$url,[
-                //             'body' => $data,
-                //         ]);
-                //     } else {
-                //         $response = $client->request($method,$url);
-                //     }
-                //     break;
+                case 'GET':
+                    if(count($data)){
+                        $response = $client->request($method,$url.'?'.http_build_query($data));
+                    } else {
+                        $response = $client->request($method,$url);
+                    }
+                    break;
+                case 'POST':
+                    if(count($data)){
+                        $response = $client->request($method,$url,[
+                            'form_params' => $data,
+                        ]);
+                    } else {
+                        $response = $client->request($method,$url);
+                    }
+                    break;
                 case 'PUT':
                     $response = $client->request('PUT',$url, ['json' => $data]);
                     break;
