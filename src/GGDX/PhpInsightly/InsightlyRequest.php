@@ -136,9 +136,18 @@ class InsightlyRequest{
         ]);
         try {
             switch ($method) {
-                case in_array($method, ['GET','POST']):
+                case 'GET':
                     if(count($data)){
                         $response = $client->request($method,$url.'?'.http_build_query($data));
+                    } else {
+                        $response = $client->request($method,$url);
+                    }
+                    break;
+                case 'POST':
+                    if(count($data)){
+                        $response = $client->request($method,$url,[
+                            'form_params' => $data,
+                        ]);
                     } else {
                         $response = $client->request($method,$url);
                     }
