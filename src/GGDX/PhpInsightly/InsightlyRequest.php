@@ -78,7 +78,7 @@ class InsightlyRequest{
     public function put($url, array $data = [])
     {
         $data = $this->sanitizeBools($data);
-        return $this->request(self::REQ_POST,$url, $data);
+        return $this->request(self::REQ_PUT,$url, $data);
     }
 
 
