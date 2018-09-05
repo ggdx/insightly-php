@@ -136,15 +136,15 @@ class InsightlyRequest{
         ]);
         try {
             switch ($method) {
-                case in_array($method, ['GET','POST']):
+                case in_array($method, ['GET']):
                     if(count($data)){
-                        $response = $client->request($method,$url.'?'.http_build_query($data));
+                        $response = $client->request($method,$url.'?'.http_build_query($data), ['debug' => true]);
                     } else {
                         $response = $client->request($method,$url);
                     }
                     break;
-                case 'PUT':
-                    $response = $client->request('PUT',$url, ['json' => $data]);
+                case in_array($method, ['POST', 'PUT']):
+                    $response = $client->request($method, $url, ['json' => $data]);
                     break;
                 default:
                     $request = new Request($method, $url);
